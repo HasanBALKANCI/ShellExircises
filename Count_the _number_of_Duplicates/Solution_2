@@ -1,0 +1,19 @@
+#!/bin/bash
+
+solution() {
+  word=${1^^}
+  counter=0
+  array=()
+  for (( i=0; i<${#word}; i++ )); do
+    count=$(echo $word| tr -cd "${word:$i:1}" | wc -c)
+    if [ $count -gt 1 ] ; then
+        string=$(echo ${array[@]})
+        isExist=$(echo $string| tr -cd "${word:$i:1}" | wc -c)
+        if [ $isExist -eq 0 ]; then
+          ((counter += 1))
+          array+=("${word:$i:1}")
+       fi
+    fi
+  done
+  echo $counter
+}
